@@ -1,0 +1,84 @@
+[gd_scene load_steps=9 format=3 uid="uid://deqaycnjepao1"]
+
+[ext_resource type="Texture2D" uid="uid://due05wksca553" path="res://assets/Boxing guy/Fighting Static Blue Idle.png" id="1_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://q5q1eoh0xhbn" path="res://assets/Boxing guy/Fighting Static Blue Guard.png" id="2_dqkch"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g2els"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_qhqgy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_dqkch")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_qhqgy"]
+resource_name = "Idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_dqkch"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qlg0r"]
+_data = {
+&"Idle": SubResource("Animation_qhqgy"),
+&"RESET": SubResource("Animation_dqkch")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qhqgy"]
+size = Vector2(9, 28.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dqkch"]
+size = Vector2(4, 5)
+
+[node name="Player" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_g2els")
+animation = &"Idle"
+frame_progress = 0.3588855
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_qlg0r")
+}
+
+[node name="BodyArea" type="Area2D" parent="."]
+
+[node name="BodyCollision" type="CollisionShape2D" parent="BodyArea"]
+position = Vector2(-2.5, 5)
+shape = SubResource("RectangleShape2D_qhqgy")
+
+[node name="PunchArea" type="Area2D" parent="."]
+
+[node name="HitArea" type="CollisionShape2D" parent="PunchArea"]
+position = Vector2(4, -2)
+shape = SubResource("RectangleShape2D_dqkch")
