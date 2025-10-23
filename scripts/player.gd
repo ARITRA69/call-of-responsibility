@@ -2,6 +2,9 @@ extends CharacterBody2D
 
 
 const SPEED = 500.0
+
+@onready var add_area: Area2D = $AddArea
+
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 func _enter_tree() -> void:

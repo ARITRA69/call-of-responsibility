@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bxne8pbflgujx"]
+[gd_scene load_steps=17 format=3 uid="uid://bxne8pbflgujx"]
 
 [ext_resource type="Script" uid="uid://mysxiqoroh85" path="res://scripts/npc.gd" id="1_abqhh"]
 [ext_resource type="Texture2D" uid="uid://ce172odf01n2r" path="res://assets/Tiny Pixel Japan Male Character Pack/NPC_Ronin.png" id="1_ideak"]
@@ -120,6 +120,9 @@ _data = {
 radius = 9.0
 height = 28.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_abqhh"]
+radius = 18.973665
+
 [node name="NPC" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_abqhh")
@@ -127,6 +130,7 @@ script = ExtResource("1_abqhh")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_p5bpe")
 animation = &"Idle"
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -137,3 +141,12 @@ autoplay = "Idle side"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 0)
 shape = SubResource("CapsuleShape2D_xxcha")
+
+[node name="AddArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AddArea"]
+shape = SubResource("CircleShape2D_abqhh")
+debug_color = Color(0.31157383, 0.6267558, 9.62615e-07, 0.41960785)
+
+[connection signal="area_entered" from="AddArea" to="." method="_on_add_area_area_entered"]
+[connection signal="body_entered" from="AddArea" to="." method="_on_add_area_body_entered"]
