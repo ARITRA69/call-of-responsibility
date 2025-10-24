@@ -18,10 +18,15 @@ config/icon="res://icon.svg"
 [autoload]
 
 NetworkHandler="*res://scripts/network_handler.gd"
+GlobalStateManager="*res://scripts/global_state_manager.gd"
 
 [dotnet]
 
 project/assembly_name="call-of-responsibility"
+
+[editor]
+
+version_control/autoload_on_startup=true
 
 [input]
 
